@@ -4,4 +4,12 @@ version = "0.1.0"
 description = "The main idea of the project is to create a web application which provides podcast summaries. These summaries will be generated via an offline data engineering process powered by an open-source LLM."
 readme = "README.md"
 requires-python = ">=3.12.11"
-dependencies = []
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "alembic>=1.16.5",
+    "fastapi>=0.116.2",
+    "gradio>=5.46.0",
+    "pydantic-settings>=2.10.1",
+    "sqlmodel>=0.0.24",
+    "uvicorn>=0.35.0",
+]
