@@ -22,14 +22,14 @@ async def init_db(db_session: SQLModelAsyncSession) -> None:
 
     series_data = [
         {
-            "title": "Can't Register for VibeCon",
-            "url": "",
-            "transcript_file": "",
+            "title": "Malicious Package? No Build For You!",
+            "url": "https://pythonbytes.fm/episodes/show/464/malicious-package-no-build-for-you",
+            "transcript_file": "python_bytes_464.txt",
         },
         {
-            "title": "Cloud bills in scientific notation",
-            "url": "",
-            "transcript_file": "",
+            "title": "2025 is @wrapped",
+            "url": "https://pythonbytes.fm/episodes/show/463/2025-is-wrapped",
+            "transcript_file": "python_bytes_463.txt",
         },
     ]
     episodes = []
