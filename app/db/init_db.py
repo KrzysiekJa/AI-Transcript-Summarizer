@@ -18,18 +18,18 @@ async def init_db(db_session: SQLModelAsyncSession) -> None:
     if not series:
         series = Series(name="Python Bytes")
         db_session.add(series)
-        await db_session.commit()
+        await db_session.flush()
 
     series_data = [
         {
             "title": "Malicious Package? No Build For You!",
             "url": "https://pythonbytes.fm/episodes/show/464/malicious-package-no-build-for-you",
-            "transcript_file": "python_bytes_464.txt",
+            "transcript_file": "python_bytes_ep_464.txt",
         },
         {
             "title": "2025 is @wrapped",
             "url": "https://pythonbytes.fm/episodes/show/463/2025-is-wrapped",
-            "transcript_file": "python_bytes_463.txt",
+            "transcript_file": "python_bytes_ep_463.txt",
         },
     ]
     episodes = []
@@ -42,11 +42,12 @@ async def init_db(db_session: SQLModelAsyncSession) -> None:
         except IOError:
             logger.error("Failed to read file %s", entry["transcript_file"])
             transcript = None
-
         episode = Episode(
             title=entry["title"], url=entry["url"], series=series, transcript=transcript
         )
         episodes.append(episode)
 
     db_session.add_all(episodes)
+    await db_session.flush()
     await db_session.commit()
+    await db_session.close()
