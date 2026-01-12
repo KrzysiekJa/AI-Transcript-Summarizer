@@ -3,9 +3,6 @@ from typing import List, Optional
 from sqlmodel import Field, Relationship, SQLModel
 
 
-# TODO: split into several files
-
-
 # TODO: add cascade delete
 # https://sqlmodel.tiangolo.com/tutorial/relationship-attributes/cascade-delete-relationships/#set-ondelete-to-cascade
 class Series(SQLModel, table=True):
