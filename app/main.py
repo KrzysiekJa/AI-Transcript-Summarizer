@@ -6,6 +6,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 
 from app import deps
 from app.config import ROOT
+from app.crud import crud
 
 
 TEMPLATES = Jinja2Templates(directory=str(ROOT / "app/templates"))
@@ -16,12 +17,14 @@ api_router = APIRouter()
 
 @api_router.get("/", status_code=status.HTTP_200_OK)
 async def root(request: Request, db: AsyncSession = Depends(deps.get_db)) -> Any:
+    episodes = await crud.episode.get_multi(db=db, limit=10)
     return TEMPLATES.TemplateResponse(
         "index.html",
         {
             "request": request,
             "title": "AI Transcript Summarizer",
             "version": app.version,
+            "episodes": episodes,
         },
     )
 

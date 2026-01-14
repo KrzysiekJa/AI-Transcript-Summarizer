@@ -3,7 +3,7 @@ from typing import Any, Optional, List, Dict
 from fastapi.encoders import jsonable_encoder
 from sqlmodel import select, delete
 from sqlmodel.ext.asyncio.session import AsyncSession
-from sqlmodel import SQLModelException
+from sqlalchemy.exc import SQLAlchemyError
 
 
 class CRUDBase[ModelType, CreateSchemaType, UpdateSchemaType]:
@@ -36,7 +36,7 @@ class CRUDBase[ModelType, CreateSchemaType, UpdateSchemaType]:
         try:
             await db.commit()
             await db.refresh(db_obj)
-        except SQLModelException as exc:
+        except SQLAlchemyError as exc:
             await db.rollback()
             raise exc
 
@@ -65,7 +65,7 @@ class CRUDBase[ModelType, CreateSchemaType, UpdateSchemaType]:
         try:
             await db.commit()
             await db.refresh(db_obj)
-        except SQLModelException as exc:
+        except SQLAlchemyError as exc:
             await db.rollback()
             raise exc
 
@@ -79,6 +79,6 @@ class CRUDBase[ModelType, CreateSchemaType, UpdateSchemaType]:
             await db.exec(stmt)
             await db.commit()
             return id
-        except SQLModelException as exc:
+        except SQLAlchemyError as exc:
             await db.rollback()
             raise exc
