@@ -20,6 +20,8 @@ async def init_db(db_session: SQLModelAsyncSession) -> None:
         db_session.add(series)
         await db_session.flush()
 
+    # TODO: add extra metadata like date of episode
+    # TODO: add scraping tools to automate addition of new episodes
     series_data = [
         {
             "title": "Malicious Package? No Build For You!",
