@@ -14,8 +14,8 @@ class LLMSettings(BaseSettings):
     N_GPU_LAYERS: int = 1
     TEMPERATURE: float = 0.3
     MAX_TOKENS: int = 1000
-    MODEL_FILE_NAME: str = "tinyllama-1.1b-chat-v1.0.Q4_K_M.gguf"
-    CHAT_FORMAT: str = "tinyllama"
+    MODEL_FILE_NAME: str = "tinyllama-1.1b-chat-v1.0.Q5_K_M.gguf"
+    CHAT_FORMAT: str = "llama-2"
 
 
 class Settings(BaseSettings):

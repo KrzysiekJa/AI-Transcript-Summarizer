@@ -1,0 +1,9 @@
+python -m venv .venv
+source .venv/bin/activate
+pip install uv
+uv status
+uv sync
+# alembic
+PYTHONPATH=. python prestart.py
+PYTHONPATH=. python app/main.py
+PYTHONPATH=. uv run data_engineering/summarize_transcript.py -t python_bytes_ep_463.txt

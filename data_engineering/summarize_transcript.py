@@ -3,7 +3,7 @@ import logging
 from pathlib import Path
 from typing import Iterator
 
-from Llama_cpp import (
+from llama_cpp import (
     Llama,
     CreateChatCompletionResponse,
     CreateChatCompletionStreamResponse,
@@ -59,7 +59,7 @@ def prepare_output(
                 "properties": {
                     "summary": {
                         "type": "string",
-                        "minLength": 200,
+                        "minLength": 50,
                         "maxLength": 300,
                         "description": "A brief summary of the interview content.",
                     },
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Summarize a transcript using a pre-trained model."
     )
-    parser.add_argument("transcript-file", "-t", type=str, required=True)
+    parser.add_argument("--transcript-file", "-t", type=str, required=True)
     parser.add_argument(
         "--model",
         "-m",
@@ -124,4 +124,4 @@ if __name__ == "__main__":
 
     logger.info(f"Loading transcript from {args.transcript_file}...")
 
-    run_summary_pipeline(model=args.model, transcript_file=args.transcript_file)
+    run_summary_pipeline(model=args.model, transcript_file_name=args.transcript_file)
