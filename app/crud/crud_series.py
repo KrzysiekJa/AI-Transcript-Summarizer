@@ -1,3 +1,4 @@
+import json
 from typing import Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -44,7 +45,13 @@ class CRUDEpisode(CRUDBase[Episode, EpisodeCreate, EpisodeUpdate]):
             .limit(limit)
         )
         results = await db.exec(stmt)
-        return results.all()
+        episodes = results.all()
+
+        for episode in episodes:
+            if episode.summary and episode.summary.content:
+                episode.summary.content = json.loads(episode.summary.content)
+
+        return episodes
 
 
 episode = CRUDEpisode(Episode)
